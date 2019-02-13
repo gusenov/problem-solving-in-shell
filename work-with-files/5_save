@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Скрипт, создающий каталог save, переписывающий в него содержимое
+# текущего каталога рекурсивно т.е. с поддиректориями и установить на директорию
+# все права для всех.
+
+mkdir "save"
+
+DIR="."
+
+ls "$DIR" | while read filename; do
+
+  if [[ -d "$filename" ]]; then
+    if [ "$filename" != "save" ]; then
+      cp -r "$filename" "./save/"
+    fi
+
+  elif [[ -f "$filename" ]]; then
+    cp "$filename" "./save/"
+  fi
+
+done
+
+chmod -R u=rwx,g=rwx,o=rwx "save"

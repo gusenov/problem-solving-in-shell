@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Скрипт, проверяющий тип файла.
+
+filename="$1"
+
+# Если файл текстовый, то загрузить редактор vi:
+if ! grep --quiet '[^[:print:][:blank:]]' $filename; then
+  vi "$filename"
+
+# Если исполняемый, то выполнить его:
+elif [ -x "$filename" ]; then
+  "$filename"
+fi

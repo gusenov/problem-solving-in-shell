@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Скрипт, проверяющий наличие в домашней директории файла profile.
+# Если этот файл отсутствует, то скопировать его из директории /etc.
+
+if [ ! -f "$HOME/.profile" ]; then
+    echo "~/.profile not found!"
+    cp /etc/profile $HOME/.profile
+fi

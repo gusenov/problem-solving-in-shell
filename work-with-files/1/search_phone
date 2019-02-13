@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Скрипт, осуществляющий поиск телефонных номеров по фамилии или по шаблону.
+
+INPUT=contact_list.csv
+OLDIFS=$IFS
+IFS=,
+[ ! -f $INPUT ] && { echo "$INPUT file not found"; exit 99; }
+while read telephone family
+do
+  if echo "$family" | grep --quiet --regexp "$1"; then
+    echo "Family : $family"
+    echo "Telephone : $telephone"
+    echo ""
+  fi
+done < $INPUT
+IFS=$OLDIFS

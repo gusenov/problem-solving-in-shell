@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Скрипт, удаляющий рекурсивно
+# в текущем каталоге и в поддиректориях файлы нулевой длины (пустые файлы).
+
+DIR="."
+
+find "$DIR" -type f | while read filename; do
+  filesize=$(wc -c $filename | awk '{print $1}')
+  if [ "$filesize" -eq "0" ]; then
+    echo "rm $filename"
+    rm $filename
+  fi
+done
